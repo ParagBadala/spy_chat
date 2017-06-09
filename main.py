@@ -122,8 +122,8 @@ def send_message():
         original_image = raw_input("Enter the name of the image : ")
 
         # name of output image after message have encoded
-        output_path = "output.jpg"
-
+        #output_path = "output.jpg"
+        output_path = raw_input("Enter the name of Output image")
         # encoding the message into the image
         Steganography.encode(original_image, output_path, text)
 
@@ -158,8 +158,9 @@ def read_message():
         # handling special words
         for item in special_words:
             if item in secret_text:
-                print ('Message contain special word : %s' %(item))
-
+                z='Message contain special word : %s' %(item)
+                #print ('Message contain special word : %s' %(item))
+                print colored(z,"red")
         # adding the time to message received
         new_chat = ChatMessage(secret_text, False)
 
@@ -173,21 +174,20 @@ def read_chat_history():
     # select the friend whose chat history to be read
     read_for = select_a_friend()
 
-    print '\n6'
-
     for chat in friends[read_for].chats:
         # checking if the message is send by me or by my friend
         if chat.sent_by_me:
 
             a = '[%s]' % (chat.time.strftime("%d %B %Y"))
-            b = 'You said: %s' % (chat.message)
-            print colored(a, 'red'), colored(b,'blue')
+            b = 'You said: '
+            c = '%s' % (chat.message)
+            print colored(a, 'red'), colored(b,'blue'), colored(c,'green')
         else:
             a = '[%s]' %(chat.time.strftime("%d %B %Y"))
             b = '%s said : ' %(friends[read_for].name)
             c = '%s' %(chat.message)
             print colored(a,'red'), colored(b,'blue'), colored(c,'green')
-            #print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
+
 
 #showing the menu options
 def start_chat():
